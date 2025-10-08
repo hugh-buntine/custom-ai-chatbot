@@ -1,0 +1,74 @@
+@startuml chatbot-architecture
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam componentFontSize 12
+
+' Define clean colors with good contrast
+skinparam component {
+    BackgroundColor<<Frontend>> #E3F2FD
+    BorderColor<<Frontend>> #1976D2
+    FontColor<<Frontend>> #000000
+    
+    BackgroundColor<<Backend>> #FFF8E1
+    BorderColor<<Backend>> #F57C00
+    FontColor<<Backend>> #000000
+    
+    BackgroundColor<<AI>> #E8F5E8
+    BorderColor<<AI>> #388E3C
+    FontColor<<AI>> #000000
+    
+    BackgroundColor<<Database>> #F3E5F5
+    BorderColor<<Database>> #7B1FA2
+    FontColor<<Database>> #000000
+}
+
+skinparam database {
+    BackgroundColor #F3E5F5
+    BorderColor #7B1FA2
+    FontColor #000000
+}
+
+skinparam storage {
+    BackgroundColor #F3E5F5
+    BorderColor #7B1FA2
+    FontColor #000000
+}
+
+' Main Components
+component "React Native App\n(Mobile & Web)" as frontend <<Frontend>>
+component "Firebase Functions\n(Python)" as functions <<Backend>>
+component "Google Gemini AI" as gemini <<AI>>
+
+database "Firestore\n(Chat & Metadata)" as firestore <<Database>>
+storage "Firebase Storage\n(PDF/DOCX/TXT Files)" as storage <<Database>>
+
+' Key Services
+package "Backend Services" {
+    component "Document Service" as docservice <<Backend>>
+    component "Storage Service" as storageservice <<Backend>>
+    component "Gemini Service" as geminiservice <<Backend>>
+}
+
+' User Flow
+frontend --> functions : API Calls\n(Upload, Chat, Get Documents)
+functions --> docservice : Process Documents
+functions --> storageservice : Manage Files
+functions --> geminiservice : AI Queries
+
+' Data Flow
+docservice --> firestore : Save Metadata
+storageservice --> storage : Store Files
+geminiservice --> gemini : AI Processing
+
+' AI Processing
+gemini --> firestore : Store Responses
+firestore --> geminiservice : Retrieve Context
+
+' Simple notes
+note top of gemini : Processes documents\nAnswers questions
+note bottom of firestore : Stores conversations\ndocument metadata
+note bottom of storage : Stores uploaded\nPDF, DOCX, TXT files
+
+@enduml
