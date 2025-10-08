@@ -173,13 +173,15 @@ This project demonstrates real-world software development including client commu
 
 ## 🤝 Contributing
 
-This project was developed as a client solution and serves as a portfolio demonstration. The architecture and implementation showcase:
+**Note: This repository serves as a portfolio demonstration of a real client project.** Due to confidentiality agreements and client privacy, the actual source code cannot be shared publicly. This README and accompanying screenshots showcase the technical architecture, features, and development approach used in the live production system.
+
+This project demonstrates:
 - **Full-stack development** capabilities across mobile and serverless platforms
 - **Client communication** and requirements gathering experience
 - **AI integration** with modern LLM services
 - **Real-world deployment** and production considerations
 
-Feedback and suggestions for improvements are welcome!
+For code samples and technical discussions about similar implementations, feel free to reach out directly.
 
 ## 👨‍💻 About the Developer
 
